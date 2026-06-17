@@ -152,3 +152,25 @@ podman ps -a --pod
 ```
 
 ## Working with containers inside a pod with podman
+
+We add a new container to the pod, in this case we add pdm-golang container
+
+```bash
+# enable run a new container image inside an existing pod 
+podman run -dt --pod <pod_name> <container_image_name> 
+
+```
+
+```bash 
+# this start a pod, be careful using podman start because this only works with container not with pods
+podman pod start <pod_name>
+```
+```bash
+
+# this stop a pod, be careful using podman stop because this only works with container not with pods
+podman pod stop <pod_name> 
+```
+```bash
+# before delete a pod we need to stoped
+podman pod rm <pod_name>
+```
