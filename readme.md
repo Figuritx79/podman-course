@@ -159,6 +159,9 @@ We add a new container to the pod, in this case we add pdm-golang container
 # enable run a new container image inside an existing pod 
 podman run -dt --pod <pod_name> <container_image_name> 
 
+# variant 
+# create a new pod and run a container inside it
+podman run -dt --pod new:<pod_name> <container_image_name>
 ```
 
 ```bash 
@@ -173,4 +176,26 @@ podman pod stop <pod_name>
 ```bash
 # before delete a pod we need to stoped
 podman pod rm <pod_name>
+```
+## Working with K8s YAML manifest
+
+With podman we can generate the kubernetes YAML manifest from the podman pods that can save developers a lot of time
+#### Kubernetes file
+
+Is essentially a file that contains instructions for kubernetes on how to create and managment  things such as pods, deployment, services and ConfigMaps in a kubernetes cluster.
+The manifest file contains important details such as which container image to use, envoroment variables, volumes, and how things are related to each other in the cluster
+
+
+```bash 
+podman generate kube <pod_name>
+```
+
+```bash
+podman generate kube <pod_name> >> {file_name}.yaml
+```
+
+```bash 
+# this play a kubernetes manifest file, with this you can test your manifest file before deploying it to a kubernetes cluster
+# this create a new pod based on the manifest file provided and you can test the functionality of the pod.
+podman play kube  <file_name>.yaml
 ```
